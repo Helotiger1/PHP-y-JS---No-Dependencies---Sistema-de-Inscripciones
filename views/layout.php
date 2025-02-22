@@ -12,22 +12,20 @@
 
 <body>
     <div class="grid-container">
-        
+
         <?php require_once "components/navbar.php" ?>
 
         <section class="main-content" id="mainContent">
+
         </section>
 
 
     </div>
     <footer class="footer">
-            <?php require_once "components/footer.php" ?>
-        </footer>
+        <?php require_once "components/footer.php" ?>
+    </footer>
 </body>
 <script type="module" src="./js/main.js"></script>
 <script type="module" src="./js/init.js"></script>
 <script type="module" src="./js/api.js"></script>
-<script type="module" src="./js/features/domicilios/modalForms.js"></script>
-<script type="module" src="./js/features/domicilios/renderTable.js"></script>
-<script type="module" src="./js/features/domicilios/configs.js"></script>
 </html>
