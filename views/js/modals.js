@@ -1,5 +1,5 @@
 import { fetchRequest } from "./api.js";
-import { FIELD_PRIMARY_KEY, SELECT_CONFIG} from "./configs.js";
+import { FIELD_PRIMARY_KEY, SELECT_CONFIG, API_INSCRIPCIONES, API_TERRITORIOS } from "./configs.js";
 
 export class ModalForm {
     /**
@@ -241,14 +241,19 @@ export class ModalForm {
     }
 
     async onSubmit(formData, id) {
-        console.log("Datos del formulario:", formData);
-        let endpoint = this.section; 
         let method;
+        let body;
+        let endpoint = this.section;
 
-        id ? endpoint += `/${id}` : endpoint;
-        id ? method = "PUT" : method = "POST";
+        id ? (endpoint += `/${id}`) : endpoint;
 
-        await fetchRequest(endpoint, method, formData);
+        id ? (method = "PUT") : (method = "POST");
+
+        body = API_INSCRIPCIONES[this.section] ? subdivideFormData(formData, API_INSCRIPCIONES[this.section]) : pick(formData, API_TERRITORIOS[this.section]);
+
+        console.log(body);
+
+        await fetchRequest(endpoint, method, body);
     }
 
     /**
@@ -261,3 +266,15 @@ export class ModalForm {
         }
     }
 }
+
+
+
+
+const pick = (obj, keys) =>
+    Object.fromEntries(keys.map(k => [k, obj[k]]));
+  
+  const subdivideFormData = (formData, config) =>
+    Object.keys(config).reduce((acc, group) => {
+      acc[group] = pick(formData, config[group]);
+      return acc;
+    }, {});
