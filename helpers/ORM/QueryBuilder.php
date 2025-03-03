@@ -210,19 +210,19 @@ class QueryBuilder
         return $this->where($column, $value)->first();
     }
 
-    public function insert(array $data): bool
+    public function insert(array $data)
     {
         $this->type = 'insert';
         return $this->run($this->buildInsert($data), false);
     }
 
-    public function update(array $data): bool
+    public function update(array $data)
     {
         $this->type = 'update';
         return $this->run($this->buildUpdate($data), false);
     }
 
-    public function delete(): bool
+    public function delete()
     {
         $this->type = 'delete';
         return $this->run($this->buildDelete(), false);
@@ -370,8 +370,7 @@ class QueryBuilder
             $bindings = $this->prepareBindings();
 
             $stmt->execute($bindings);
-            $result = $fetch ? $stmt->fetchAll(PDO::FETCH_ASSOC) : true;
-
+            $result = $fetch ? $stmt->fetchAll(PDO::FETCH_ASSOC) : $this->pdo->lastInsertId();
             $this->reset();
             return $result;
         } catch (PDOException $e) {

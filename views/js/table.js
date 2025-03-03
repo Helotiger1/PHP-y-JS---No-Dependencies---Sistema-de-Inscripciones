@@ -73,6 +73,7 @@ export class TableView {
                 const td = document.createElement("td");
                 this.options.actions.forEach((action) => {
                     const btn = document.createElement("button");
+                    console.log(item);
                     btn.textContent =
                         action.charAt(0).toUpperCase() + action.slice(1);
                     btn.className = `${

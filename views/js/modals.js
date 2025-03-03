@@ -1,5 +1,5 @@
 import { fetchRequest } from "./api.js";
-import { FIELD_PRIMARY_KEY, SELECT_CONFIG, API_INSCRIPCIONES, API_TERRITORIOS } from "./configs.js";
+import { OBTENER_FK, FIELD_PRIMARY_KEY, SELECT_CONFIG, AGREGAR_INSCRIPCIONES, AGREGAR_TERRITORIOS, MODIFICAR_INSCRIPCIONES, MODIFICAR_TERRITORIOS } from "./configs.js";
 
 export class ModalForm {
     /**
@@ -147,7 +147,7 @@ export class ModalForm {
             new FormData(form).forEach((value, key) => {
                 formData[key] = value;
             });
-            this.onSubmit(formData, data[FIELD_PRIMARY_KEY[this.section]]);
+            this.onSubmit(formData, data);
             this.close();
         });
         footer.appendChild(btnCancel);
@@ -240,7 +240,11 @@ export class ModalForm {
         }
     }
 
-    async onSubmit(formData, id) {
+    async onSubmit(formData, data) {
+        let fks = pick(data, OBTENER_FK);
+        console.log(fks);
+
+        let id = data[FIELD_PRIMARY_KEY[this.section]];
         let method;
         let body;
         let endpoint = this.section;
@@ -249,8 +253,15 @@ export class ModalForm {
 
         id ? (method = "PUT") : (method = "POST");
 
-        body = API_INSCRIPCIONES[this.section] ? subdivideFormData(formData, API_INSCRIPCIONES[this.section]) : pick(formData, API_TERRITORIOS[this.section]);
+        if (method === "PUT") {
+            body = MODIFICAR_INSCRIPCIONES[this.section] ? subdivideFormData(formData, MODIFICAR_INSCRIPCIONES[this.section]) : pick(formData, MODIFICAR_TERRITORIOS[this.section]);
+        }
 
+        if (method == "POST") {
+        body = AGREGAR_INSCRIPCIONES[this.section] ? subdivideFormData(formData, AGREGAR_INSCRIPCIONES[this.section]) : pick(formData, AGREGAR_TERRITORIOS[this.section]);
+        }
+        body = { ...body, ...fks };
+        
         console.log(body);
 
         await fetchRequest(endpoint, method, body);
@@ -271,7 +282,10 @@ export class ModalForm {
 
 
 const pick = (obj, keys) =>
-    Object.fromEntries(keys.map(k => [k, obj[k]]));
+    Object.fromEntries(keys
+        .filter(k => k in obj) // Filtra solo las claves que existen
+        .map(k => [k, obj[k]])
+    );
   
   const subdivideFormData = (formData, config) =>
     Object.keys(config).reduce((acc, group) => {

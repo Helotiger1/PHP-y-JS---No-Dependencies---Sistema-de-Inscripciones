@@ -20,11 +20,6 @@ abstract class Controller{
         return $entidades;
     }
 
-    public static function showByIdParent($params){
-        $id = $params["id"];
-        return static::$nombreEntidad::getByParent($id);
-    }
-
     public static function store($params){
         $body = $params["body"];
         

@@ -1,11 +1,11 @@
-/* ---CONFIGURACIONES DE API--- */
+/* ---CONFIGURACIONES DE MODIFICAR--- */
 
-const API_INSCRIPCION = {
-    inscripciones : ["calificaciones", "rango" , "fechaInscripcion", "grado"]
-}
+const MODIFICAR_INSCRIPCION = ["calificaciones", "rango" , "fechaInscripcion", "grado", "representantes_idRepresentante", "estudiantes_idEstudiante"];
 
-const API_MAESTROS = {
-    persona: [
+export const OBTENER_FK = ["personas_idPersona", "contacto_idContacto"];
+
+const MODIFICAR_MAESTROS = {
+    personas: [
         "nombrePersona",
         "apellidoPersona",
         "cedulaPersona",
@@ -13,17 +13,17 @@ const API_MAESTROS = {
         "fechaNac",
         "ciudades_idCiudad",
     ],
-    maestro: ["cargoActual", "estadoCivil"],
-    contacto: [
+    contactos: [
         "telefonoPrincipal",
         "telefonoSecundario",
         "emailPrincipal",
         "emailSecundario",
     ],
+    maestros: ["cargoActual", "estadoCivil"],
 };
 
-const API_REPRESENTANTES = {
-    persona: [
+const MODIFICAR_REPRESENTANTES = {
+    personas: [
         "nombrePersona",
         "apellidoPersona",
         "cedulaPersona",
@@ -31,17 +31,17 @@ const API_REPRESENTANTES = {
         "fechaNac",
         "ciudades_idCiudad",
     ],
-    representante: ["estadoCivil", "parentesco", "estatus"],
-    contacto: [
+    contactos: [
         "telefonoPrincipal",
         "telefonoSecundario",
         "emailPrincipal",
         "emailSecundario",
     ],
+    representantes: ["estadoCivil", "parentesco", "estatus"],
 }
 
-const API_ESTUDIANTES = {
-    persona: [
+const MODIFICAR_ESTUDIANTES = {
+    personas: [
         "nombrePersona",
         "apellidoPersona",
         "cedulaPersona",
@@ -49,21 +49,89 @@ const API_ESTUDIANTES = {
         "fechaNac",
         "ciudades_idCiudad",
     ],
-    contacto: [
+    contactos: [
         "telefonoPrincipal",
         "telefonoSecundario",
         "emailPrincipal",
         "emailSecundario",
     ],
-    estudiante: [
-        "idEstudiante",
-        "nombreRepresentante",
+    estudiantes: [
+        "representantes_idRepresentante",
         "enfermedades",
         "alergias",
         "estatura",
         "peso",
         "tallaCalzado",
         "tallaPantalon",
+        "estatus"
+    ],
+};
+
+
+/* ---CONFIGURACIONES DE AGREGAR--- */
+const AGREGAR_INSCRIPCION = ["calificaciones", "rango" , "fechaInscripcion", "grado", "representantes_idRepresentante", "estudiantes_idEstudiante"]
+
+
+const AGREGAR_MAESTROS = {
+    personas: [
+        "nombrePersona",
+        "apellidoPersona",
+        "cedulaPersona",
+        "sexoPersona",
+        "fechaNac",
+        "ciudades_idCiudad",
+    ],
+    contactos: [
+        "telefonoPrincipal",
+        "telefonoSecundario",
+        "emailPrincipal",
+        "emailSecundario",
+    ],
+    maestros: ["cargoActual", "estadoCivil"],
+};
+
+const AGREGAR_REPRESENTANTES = {
+    personas: [
+        "nombrePersona",
+        "apellidoPersona",
+        "cedulaPersona",
+        "sexoPersona",
+        "fechaNac",
+        "ciudades_idCiudad",
+    ],
+    contactos: [
+        "telefonoPrincipal",
+        "telefonoSecundario",
+        "emailPrincipal",
+        "emailSecundario",
+    ],
+    representantes: ["estadoCivil", "parentesco", "estatus"],
+}
+
+const AGREGAR_ESTUDIANTES = {
+    personas: [
+        "nombrePersona",
+        "apellidoPersona",
+        "cedulaPersona",
+        "sexoPersona",
+        "fechaNac",
+        "ciudades_idCiudad",
+    ],
+    contactos: [
+        "telefonoPrincipal",
+        "telefonoSecundario",
+        "emailPrincipal",
+        "emailSecundario",
+    ],
+    estudiantes: [
+        "representantes_idRepresentante",
+        "enfermedades",
+        "alergias",
+        "estatura",
+        "peso",
+        "tallaCalzado",
+        "tallaPantalon",
+        "estatus"
     ],
 };
 
@@ -480,7 +548,6 @@ const FIELDS_REPRESENTANTES = [
     "estatus",
 ];
 const FIELDS_ESTUDIANTES = [
-    "idEstudiante",
     "nombrePersona",
     "apellidoPersona",
     "cedulaPersona",
@@ -518,10 +585,10 @@ export const FIELD_PRIMARY_KEY = {
     municipios: "idMunicipio",
     parroquias: "idParroquia",
     ciudades: "idCiudad",
-    maestros: "idMaestros",
+    maestros: "idMaestro",
     representantes: "idRepresentante",
-    estudiantes: "idEstudiantes",
-    inscripciones: "idInscripciones",
+    estudiantes: "idEstudiante",
+    inscripciones: "idInscripcion",
 };
 
 export const FIELD_HEADERS = {
@@ -567,19 +634,20 @@ export const FIELD_HEADERS = {
 
 /* ---CONFIGURACIONES GENERALES--- */
 
-export const API_INSCRIPCIONES = {
-    maestros: API_MAESTROS,
-    representantes: API_REPRESENTANTES,
-    estudiantes: API_ESTUDIANTES,
-    inscripciones: API_INSCRIPCION,
+export const AGREGAR_INSCRIPCIONES = {
+    maestros: AGREGAR_MAESTROS,
+    representantes: AGREGAR_REPRESENTANTES,
+    estudiantes: AGREGAR_ESTUDIANTES,
+    
 };
 
-export const API_TERRITORIOS = {
+export const AGREGAR_TERRITORIOS = {
     paises: ["nombrePais", "estatus"],
     estados: ["nombreEstado", "paises_idPais"],
     municipios: ["nombreMunicipio", "estados_idEstado"],
     parroquias: ["nombreParroquia", "municipios_idMunicipio"],
     ciudades: ["nombreCiudad", "parroquias_idParroquia"],
+    inscripciones: AGREGAR_INSCRIPCION,
 };
 export const FIELDS_TABLES = {
     paises: FIELDS_PAISES,
@@ -603,4 +671,23 @@ export const MODAL_CONFIGS = {
     representantes: MODAL_REPRESENTANTES,
     estudiantes: MODAL_ESTUDIANTES,
     inscripciones: MODAL_INSCRIPCIONES,
+};
+
+
+
+
+/*---CONFIGURACIONES DE MODIFICAR--- */
+export const MODIFICAR_INSCRIPCIONES = {
+    maestros: MODIFICAR_MAESTROS,
+    representantes: MODIFICAR_REPRESENTANTES,
+    estudiantes: MODIFICAR_ESTUDIANTES,
+};
+
+export const MODIFICAR_TERRITORIOS = {
+    paises: ["nombrePais", "estatus"],
+    estados: ["nombreEstado", "paises_idPais"],
+    municipios: ["nombreMunicipio", "estados_idEstado"],
+    parroquias: ["nombreParroquia", "municipios_idMunicipio"],
+    ciudades: ["nombreCiudad", "parroquias_idParroquia"],
+    inscripciones: MODIFICAR_INSCRIPCION,
 };
