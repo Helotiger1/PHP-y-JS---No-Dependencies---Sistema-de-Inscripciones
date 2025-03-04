@@ -241,8 +241,10 @@ export class ModalForm {
     }
 
     async onSubmit(formData, data) {
-        let fks = pick(data, OBTENER_FK);
-        console.log(fks);
+        let fks = {};
+        if (FK.includes(this.section)) {
+            fks = pick(data, OBTENER_FK);
+        }
 
         let id = data[FIELD_PRIMARY_KEY[this.section]];
         let method;
@@ -292,3 +294,6 @@ const pick = (obj, keys) =>
       acc[group] = pick(formData, config[group]);
       return acc;
     }, {});
+
+
+const FK = ["estudiantes", "representantes"]

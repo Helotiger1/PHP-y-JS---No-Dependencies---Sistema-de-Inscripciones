@@ -376,7 +376,12 @@ const MODAL_REPRESENTANTES = {
         { label: "Nombre", name: "nombrePersona", type: "text" },
         { label: "Apellido", name: "apellidoPersona", type: "text" },
         { label: "Cédula", name: "cedulaPersona", type: "text" },
-        { label: "Sexo", name: "sexoPersona", type: "text" },
+        {
+            label: "Sexo",
+            name: "sexoPersona",
+            type: "select",
+            options: ["Masculino", "Femenino", "Otro"],
+        },
         { label: "Fecha de Nacimiento", name: "fechaNac", type: "date" },
         ...CIUDAD_INYECTION,
         {
@@ -419,7 +424,12 @@ const MODAL_ESTUDIANTES = {
         { label: "Nombre", name: "nombrePersona", type: "text" },
         { label: "Apellido", name: "apellidoPersona", type: "text" },
         { label: "Cédula", name: "cedulaPersona", type: "text" },
-        { label: "Sexo", name: "sexoPersona", type: "text" },
+        {
+            label: "Sexo",
+            name: "sexoPersona",
+            type: "select",
+            options: ["Masculino", "Femenino", "Otro"],
+        },
         { label: "Fecha de Nacimiento", name: "fechaNac", type: "date" },
         ...CIUDAD_INYECTION,
         {
