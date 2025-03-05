@@ -561,7 +561,6 @@ const FIELDS_ESTUDIANTES = [
     "nombrePersona",
     "apellidoPersona",
     "cedulaPersona",
-    "nombreRepresentante",
     "sexoPersona",
     "nombreCiudad",
     "telefonoPrincipal",
@@ -576,6 +575,9 @@ const FIELDS_ESTUDIANTES = [
     "tallaCalzado",
     "tallaPantalon",
     "estatus",
+    "cedulaRepresentante",
+    "nombreRepresentante",
+    "apellidoRepresentante",
 ];
 const FIELDS_INSCRIPCIONES = [
     "calificaciones",
@@ -617,6 +619,8 @@ export const FIELD_HEADERS = {
     estatus: "Estado",
     idEstudiante: "ID Estudiante",
     nombreRepresentante: "Nombre del Representante",
+    apellidoRepresentante: "Apellido del Representante",
+    cedulaRepresentante: "Cedula del Representante",
     enfermedades: "Enfermedades",
     alergias: "Alergias",
     estatura: "Estatura",

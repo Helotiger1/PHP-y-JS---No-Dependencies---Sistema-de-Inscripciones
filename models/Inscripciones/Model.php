@@ -42,7 +42,11 @@ abstract class Model implements JsonSerializable
         }
 
         if (!empty(static::$subquerie)) {
-            static::$select[] = static::$subquerie;
+            if (is_array(static::$subquerie)) {
+                static::$select[] = implode(', ', static::$subquerie); // Puedes cambiar ' ' por ', ' si lo necesitas
+            } else {
+                static::$select[] = static::$subquerie;
+            }
         }
 
         return static::$ORM->table(static::$table)->cascadeJoins(static::$cascadeJoins)->cascadeJoins(static::$cascadeJoins2)->joins(static::$joins)->nestedJoins(static::$nestedJoins)->select(static::$select);

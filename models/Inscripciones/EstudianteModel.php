@@ -8,13 +8,10 @@ class EstudianteModel extends Model {
     protected static $table = 'estudiantes';
     protected static $joins = ['personas' => 'personas_idPersona', 'contacto' => 'contacto_idContacto'];
     protected static $nestedJoins = ['ciudades' => 'personas.ciudades_idCiudad'];
-    protected static $subquerie = '(SELECT personas.nombrePersona
-                                FROM personas 
-                                WHERE personas.idPersona = (
-                                    SELECT representantes.personas_idPersona 
-                                    FROM representantes 
-                                    WHERE estudiantes.representantes_idRepresentante = representantes.idRepresentante
-                                )) as nombreRepresentante';
+    protected static $subquerie = ['(SELECT personas.nombrePersona FROM personas  WHERE personas.idPersona = (     SELECT representantes.personas_idPersona      FROM representantes      WHERE estudiantes.representantes_idRepresentante = representantes.idRepresentante )) as nombreRepresentante',
+                                '(SELECT personas.apellidoPersona FROM personas  WHERE personas.idPersona = (     SELECT representantes.personas_idPersona      FROM representantes      WHERE estudiantes.representantes_idRepresentante = representantes.idRepresentante )) as apellidoRepresentante',
+        '(SELECT personas.cedulaPersona FROM personas  WHERE personas.idPersona = (     SELECT representantes.personas_idPersona      FROM representantes      WHERE estudiantes.representantes_idRepresentante = representantes.idRepresentante )) as cedulaRepresentante',
+    ];
 }
 
 
