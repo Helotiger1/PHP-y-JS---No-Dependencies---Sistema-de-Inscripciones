@@ -1,3 +1,4 @@
+El punto real de entrada es layaout.php.
 Esto fue un experimento, realmente. 
 Estaba solo, los pocos commits que recibi de ayuda los acabe borrando.
 Por cada linea de codigo de este proyecto, solo me cuestione una cosa
